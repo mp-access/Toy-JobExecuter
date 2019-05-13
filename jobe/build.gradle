@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+}
+
+group 'ch.uzh.ifi.access.jobe'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.4.RELEASE'
+    compile group: "org.springframework", name: "spring-web", version: '5.1.7.RELEASE'
+    compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: '2.9.8'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.4.2'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
