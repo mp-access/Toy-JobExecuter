@@ -25,6 +25,7 @@ public class Application {
         return args -> {
             JobeServer jServer = new JobeServer();
             jServer.getSupportedLanguages();
+            jServer.runSimpleSpec();
         };
     }
 
