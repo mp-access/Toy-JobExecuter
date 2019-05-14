@@ -13,18 +13,18 @@ import lombok.NoArgsConstructor;
 public class RunResult {
 
     @JsonProperty(value = "run_id")
-    String runId;
+    private String runId;
 
-    Status outcome;
+    private Status outcome;
 
     @JsonProperty(value = "cmpinfo")
-    String cmpInfo;
+    private String cmpInfo;
 
     @JsonProperty(value = "stdout")
-    String stdout;
+    private String stdout;
 
     @JsonProperty(value = "stderr")
-    String stderr;
+    private String stderr;
 
     @JsonProperty(value = "outcome")
     void setOutcome(int status){
