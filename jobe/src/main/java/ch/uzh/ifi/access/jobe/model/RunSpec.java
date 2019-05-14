@@ -21,13 +21,13 @@ public class RunSpec implements Serializable {
 
     public enum Language {PYTHON3}
 
-    Language languageId;
+    private Language languageId;
 
     @JsonProperty(value = "sourcecode")
-    String sourceCode;
+    private String sourceCode;
 
     @JsonProperty(value = "sourcefilename")
-    String sourceFileName;
+    private String sourceFileName;
 
     @JsonProperty(value = "language_id")
     public String getLanguageId() {
