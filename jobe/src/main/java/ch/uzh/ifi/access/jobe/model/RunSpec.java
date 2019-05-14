@@ -1,4 +1,4 @@
-package ch.uzh.ifi.access.jobe;
+package ch.uzh.ifi.access.jobe.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class RunSpec implements Serializable {
 
-    enum Language {PYTHON3}
+    public enum Language {PYTHON3}
 
     Language languageId;
 

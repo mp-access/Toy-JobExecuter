@@ -1,5 +1,7 @@
 package ch.uzh.ifi.access.jobe;
 
+import ch.uzh.ifi.access.jobe.model.RunResult;
+import ch.uzh.ifi.access.jobe.model.RunSpec;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -41,6 +43,6 @@ public class JobeServer {
 
 
         ResponseEntity<RunResult> response = restTemplate.postForEntity(apiURL + "/runs", request, RunResult.class);
-        log.debug(response.getBody().getOutcome().toString());
+        log.debug(response.toString());
     }
 }

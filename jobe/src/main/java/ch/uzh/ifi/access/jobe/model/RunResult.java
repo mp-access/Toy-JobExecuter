@@ -1,4 +1,4 @@
-package ch.uzh.ifi.access.jobe;
+package ch.uzh.ifi.access.jobe.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
