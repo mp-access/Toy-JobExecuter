@@ -10,7 +10,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 class RunResultJsonTest {
 
     @Test
-    void shouldMapToModel() throws IOException {
+    void shouldMapToModel_HasCompilationErrorAndCmpInfo() throws IOException {
         var responseAsString = "{\n" +
                 "  \"run_id\": null,\n" +
                 "  \"outcome\": 11,\n" +
@@ -25,5 +25,21 @@ class RunResultJsonTest {
         assertThat(model.getCmpInfo()).isNotBlank();
     }
 
+    @Test
+    void shouldMapToModel_isOKHasStdout() throws IOException {
+        var responseAsString = "{\n" +
+                "  \"run_id\": null,\n" +
+                "  \"outcome\": 15,\n" +
+                "  \"cmpinfo\": \"\",\n" +
+                "  \"stdout\": \"Hello world!\\n\",\n" +
+                "  \"stderr\": \"\"\n" +
+                "}";
+
+        var model = new ObjectMapper().readValue(responseAsString, RunResult.class);
+
+        assertThat(model.getOutcome()).isEqualTo(RunResult.Status.OK);
+        assertThat(model.getCmpInfo()).isBlank();
+        assertThat(model.getStdout()).isNotBlank();
+    }
 
 }
