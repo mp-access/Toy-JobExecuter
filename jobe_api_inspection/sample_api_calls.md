@@ -195,3 +195,56 @@ curl --request POST \
 				"debug" : true
     }
 }
+
+
+## Execute Exercise with Folder Structure
+
+__Store files on server:__
+
+Store a zip file on the jobe server manually. Excample could look like:
+
+```BASH
+code/
+test/
+test/TestStringMethods1.py
+test/TestStringMethods2.py
+test/__init__.py
+```
+
+__Execute Testsuite:__
+
+Unzip the zip file and run python unittest via commandline:i
+
+```BASH
+curl --request POST \
+  --url http://localhost:4000/jobe/index.php/restapi/runs \
+  --header 'accept: application/json' \
+  --header 'accept-charset: utf-8' \
+  --header 'content-type: application/json' \
+  --data '{
+    "run_spec": {
+        "language_id": "python3",
+        "sourcecode": "import zipfile\nimport os\n\nzip_ref = zipfile.ZipFile(\"wsnapshot\", '\''r'\'')\nzip_ref.extractall('\''.'\'')\nzip_ref.close()\n\nos.system('\''ls -l'\'')\nos.system('\''python3 -m unittest test/*.py -v'\'')\n",
+        "sourcefilename": "run.py",
+			  "file_list": [
+            [
+                "wsnapshot",
+                "wsnapshot"
+            ]
+        ],
+				"debug" : true
+    }
+}'
+```
+
+__Result__
+
+```JSON
+{
+  "run_id": "\/home\/jobe\/runs\/jobe_FH0b5P",
+  "outcome": 12,
+  "cmpinfo": "",
+  "stdout": "total 24\ndrwxr-xr-x 2 jobe00   jobe     4096 May 23 03:35 __pycache__\ndrwxr-xr-x 2 jobe00   jobe     4096 May 23 03:35 code\n-rw-r--r-- 1 www-data www-data  247 May 23 03:35 prog.cmd\n-rw-r--r-- 1 www-data www-data    0 May 23 03:35 prog.err\n-rw-r--r-- 1 www-data www-data    0 May 23 03:35 prog.out\n-rw-r--r-- 1 www-data www-data  176 May 23 03:35 run.py\ndrwxr-xr-x 2 jobe00   jobe     4096 May 23 03:35 test\n-rw-r--r-- 1 www-data www-data 1210 May 23 03:35 wsnapshot\n",
+  "stderr": "test_isupper (test.TestStringMethods1.TestStringMethods1) ... ok\ntest_split (test.TestStringMethods1.TestStringMethods1) ... ok\ntest_upper (test.TestStringMethods1.TestStringMethods1) ... ok\ntest_isupper (test.TestStringMethods2.TestStringMethods2) ... ok\ntest_split (test.TestStringMethods2.TestStringMethods2) ... ok\ntest_upper (test.TestStringMethods2.TestStringMethods2) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+}
+```
